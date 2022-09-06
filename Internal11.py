@@ -2,19 +2,19 @@ import tkinter
 from tkinter import messagebox
 
 
-# 定义一个问题类
+# define a question type
 class Questionnaire(object):
     def __init__(self):
         self.d = {}
 
-    # 传入的分别是问题、选择的选项和选择的内容
+    # type the detail of the question
     def add_question(self, question, question_lst, answer):
         k = question_lst[answer][-1]
-        # 判断是否存在该键 如果没有则创建该键值
+        # to see if the question is correct
         if not self.d.get(question):
             self.d[question] = {k: 1}
         else:
-            # 如果问题已经存在提交结果 则判断选项是否存在，有则+1，无责新建1
+            # If the problem already exists and submit the result, judge whether the option exists, if yes, +1, no responsibility to create a new 1
             if not self.d[question].get(k):
                 self.d[question][k] = 1
             else:
@@ -26,9 +26,9 @@ class Questionnaire(object):
             return True
 
 
-# 执行提交问卷
+# process the question
 def add_question():
-    # 必须都选择了 才能判定
+    # must be selected to determine
     if question1_answer.get() in range(len(question1_list)) and question2_answer.get() in range(len(question2_list)):
         # 添加选择的问题和选项传入类
         q.add_question(question1_title.get(), question1_list, question1_answer.get())
@@ -38,7 +38,7 @@ def add_question():
         messagebox.showwarning(title='error warning', message='All must be done to submit！')
 
 
-# 执行显示结果
+# Execute display result
 def show_question():
     # 判定是否有数据
     if not q.is_empty():
@@ -52,7 +52,7 @@ def show_question():
         messagebox.showwarning(title='error warning', message='Please submit the questionnaire first!')
 
 
-# 主窗口基本信息
+# Main Info
 root = tkinter.Tk()
 root.title('Survey')
 width, height = 300, 400
@@ -76,7 +76,6 @@ for index, name in question1_list:
                                                                                       sticky=tkinter.W)
 leng += 5
 
-# 问卷二
 question2_title = tkinter.StringVar()
 question2_title.set('2.There are many different kinds of animals and plants, and they lives in many different types '
                     'of environment. what words is used to describe this idea ？')
